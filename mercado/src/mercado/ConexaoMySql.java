@@ -11,12 +11,11 @@ public class ConexaoMySql {
 	String senha = "";
 
 	public Connection conectar() {
-		
+			
 	    try {
 
-            Connection conn = DriverManager.getConnection(
-                url, usuario, senha
-            );
+	    	Connection conn = DriverManager.getConnection(
+	                url, usuario, senha); 
 
             System.out.println("Conexão realizada com sucesso!");
 
