@@ -6,9 +6,14 @@ public class Main {
     	
     	ConexaoMySql conn = new ConexaoMySql();
     	
-    	ProdutoController produto = new ProdutoController(conn);
+    	ProdutoController produtoController = new ProdutoController(conn);
     	
-    	produto.listarProdutos();
+
+    	Produto produto = new Produto("COCA-COLA", 8.00);
+    	
+    	produtoController.cadastrarProduto(produto);
+    	
+    	produtoController.listarProdutos();
     	
     	
     }

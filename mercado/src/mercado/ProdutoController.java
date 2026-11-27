@@ -14,9 +14,9 @@ public class ProdutoController {
 	}
 	
 	// CONCEITO DO CRUD
-	// C - CREATE - INSERT
-	// R - READ - SELECT
-	// U - UPDATE - UPDATE
+	// C - CREATE - INSERT - OK  
+	// R - READ - SELECT - OK 
+	// U - UPDATE - UPDATE 
 	// D - DELETE - DELETE
 	
 	public void listarProdutos() {
@@ -43,10 +43,57 @@ public class ProdutoController {
 			
 		}
 		
+	}
+	
+
+	public void cadastrarProduto(Produto produto) {
 		
+		String sql = "INSERT INTO produto(NOME, PRECO) VALUES(?, ?)";
+		
+		try {
+			
+			Connection conn = this.conexaoMysql.conectar();
+			PreparedStatement qry = conn .prepareStatement(sql);
+			
+			qry.setString(1, produto.NOME);
+			qry.setDouble(2, produto.PRECO);
+			
+			qry.executeUpdate();
+			
+			System.out.println("Produto cadastrado cum sucesso!");
+			
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("Erro ao cadastrar um novo produto");
+		}
 		
 	}
 	
+	
+	public void atualizarProduto(Produto produto) {
+		String sql = "UPDATE produto "
+				+ "SET NOME = ?, "
+				+ "PRECO = ? "
+				+ "WHERE ID = ?";
+		try {
+			Connection conn = this.conexaoMysql.conectar();
+			PreparedStatement qry = conn .prepareStatement(sql);
+			
+			qry.setString(1, produto.NOME);
+			qry.setDouble(2, produto.PRECO);
+			qry.setInt(3, produto.ID);
+			
+			qry.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao atualizar produto!");
+		}
+	}
+	
+	public void deletarProdutos(int id) {
+		String sql = "DELETE FROM produto WHERE id = ?";
+			//...
+	}
 	
 	
 }
